@@ -155,29 +155,52 @@ export default {
         {
           legendName: '粉面粥店',
           value: 67,
-          percent: '15.40%',
+          percent: '15.40',
           itemStyle: {
             color: '#e7e702'
-          }
+          },
+          name: '粉面粥店 ｜ 15.40%'
         },
         {
           legendName: '简餐便当',
           value: 97,
-          percent: '22.30%',
+          percent: '22.30',
           itemStyle: {
             color: '#8d7fec'
-          }
+          },
+          name: '简餐便当 ｜ 22.30%'
         },
         {
           legendName: '汉堡披萨',
           value: 92,
-          percent: '22.15%',
+          percent: '22.15',
           itemStyle: {
             color: '#5085f2'
-          }
+          },
+          name: '汉堡披萨 ｜ 22.15%'
         }
       ]
       this.categoryOptions = {
+        tooltip: {
+          trigger: 'item',
+          formatter: function (params) {
+            const str = params.seriesName + '<br />' +
+              params.marker + params.data.legendName + '<br />' +
+              '数量:' + params.data.value + '<br />' +
+              '占比:' + params.data.percent + '%'
+            return str
+          }
+        },
+        legend: {
+          type: 'scroll',
+          orient: 'vertical',
+          height: 250,
+          left: '70%',
+          top: 'middle',
+          textStyle: {
+            color: '#8c8c8c'
+          }
+        },
         title: [
           {
             text: '品类分布',
@@ -204,6 +227,7 @@ export default {
           }
         ],
         series: [{
+          name: '品类分布',
           type: 'pie',
           data: mockData,
           label: {
@@ -225,7 +249,11 @@ export default {
               smooth: true
             }
           },
-          clockwise: false
+          clockwise: false,
+          itemStyle: {
+            borderWidth: 4,
+            borderColor: '#fff'
+          }
         }]
       }
     }
