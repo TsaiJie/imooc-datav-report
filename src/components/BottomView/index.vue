@@ -143,9 +143,91 @@ export default {
       ]
     }
   },
+  mounted () {
+    this.renderPieChart()
+  },
   methods: {
     onPageChange (page) {
       console.log(page)
+    },
+    renderPieChart () {
+      const mockData = [
+        {
+          legendName: '粉面粥店',
+          value: 67,
+          percent: '15.40%',
+          itemStyle: {
+            color: '#e7e702'
+          }
+        },
+        {
+          legendName: '简餐便当',
+          value: 97,
+          percent: '22.30%',
+          itemStyle: {
+            color: '#8d7fec'
+          }
+        },
+        {
+          legendName: '汉堡披萨',
+          value: 92,
+          percent: '22.15%',
+          itemStyle: {
+            color: '#5085f2'
+          }
+        }
+      ]
+      this.categoryOptions = {
+        title: [
+          {
+            text: '品类分布',
+            textStyle: {
+              fontSize: 14,
+              color: '#666'
+            },
+            left: 20,
+            top: 20
+          }, {
+            text: '累计订单量',
+            subtext: '320',
+            x: '34.5%',
+            y: '42.5%',
+            textAlign: 'center',
+            textStyle: {
+              fontSize: 14,
+              color: '#999'
+            },
+            subtextStyle: {
+              fontSize: 28,
+              color: '#333'
+            }
+          }
+        ],
+        series: [{
+          type: 'pie',
+          data: mockData,
+          label: {
+            normal: {
+              show: true,
+              position: 'outter',
+              formatter (params) {
+                return `${params.data.legendName}`
+              }
+            }
+          },
+          center: ['35%', '50%'],
+          // 默认为 0 75%
+          radius: ['45%', '60%'],
+          labelLine: {
+            normal: {
+              length: 5,
+              length2: 3,
+              smooth: true
+            }
+          },
+          clockwise: false
+        }]
+      }
     }
   }
 }
